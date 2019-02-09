@@ -5,19 +5,24 @@ body {
 }
 
 .container {
-  border: 2px solid pink;
-  background-color: #f1f1f1;
+  border: 2px solid purple;
+  background-color: white;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
+  display: inline-block;
+  max-width: 75%;
 }
 
+.textboxcont{
+  background-color: white;
+  border: 1px solid black;
+  max-width: 75%;
+  height: 30px;
+  width: 100%;
+  padding: 3px;
+}
 .darker {
-  border-color: pink;
+  border-color: purple;
   background-color: #ddd;
-}
-
-input[type="text"] {
-     width: 100%;
-     box-sizing: border-box;
 }
