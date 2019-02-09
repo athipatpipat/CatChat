@@ -3,8 +3,10 @@ var button = document.getElementById("button");
 var textbox = document.getElementById("textbox");
 
 button.addEventListener("click", function(){
-  var newMessage = document.createElement("li");
+  var newBox = document.getElementById("box")
+  var newMessage = document.createElement("ul");
   newMessage.innerHTML = textbox.value;
-  messages.appendChild(newMessage);
+  newBox.appendChild(newMessage);
+  //message.appendChild(newBox);
   textbox.value = "";
 });
