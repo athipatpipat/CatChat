@@ -13,6 +13,7 @@ button.addEventListener("click", function(){
 
 
 // New Chat Window Popup
+
 function openForm() {
   document.getElementById("Sport").style.display = "block";
 }
