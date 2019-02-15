@@ -7,32 +7,25 @@
   </head>
   <body>
 
-    <h2>CatChat</h2>
 
-    <!-- empty container -->
-    <div id = "box" class="container darker">
-    </div>
+<div class = "Categories"
+  <button class="open-button" onclick="openForm()">Sports</button>
+</div>
 
-
-    <!-- Sport Chat Room -->
-    <button class="open-button" onclick="openForm()">Chat</button>
-    <div class="chat-popup" id="Sport">
+  <main>
+    <h2 id="catchathead">CatChat</h2>
+    <div class="chat-popup" id="Sports">
       <div class="form-container"> <!--  change this from div tag to form tag learn more about a form tag with Django -->
-        <h1> Sport </h1>
-        <textarea placeholder="Text message.." required></textarea>
-        <button type="submit" class="btn">Send</button>
+        <h1> Sports </h1>
+        <div id = "box" class="container darker">
+        <textarea id="textbox" placeholder="Text message.." required></textarea>
+        <button id="button" type="submit" class="btn">Send</button>
         <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
       </div>
-  </div>
-
-
-    <!-- send text box -->
-    <div>
-      <!--<ul style="list-style-type: none;" id="messages" class="container darker"></ul>-->
-      <input id="textbox" type="text" class="textboxcont">
-      <button id="button">Send</button>
-      <script src="script.js"></script>
     </div>
+    </div>
+  <script src="script.js"></script>
+ </main>
 
-  </body>
+</body>
 </html>
