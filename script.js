@@ -10,3 +10,13 @@ button.addEventListener("click", function(){
   //message.appendChild(newBox);
   textbox.value = "";
 });
+
+
+// New Chat Window Popup
+function openForm() {
+  document.getElementById("Sport").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("Sport").style.display = "none";
+}
