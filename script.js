@@ -9,8 +9,10 @@ function sendSports(e) {
      var newMessage_sports = document.createElement("ul");
      newMessage_sports.innerHTML = textbox_sports.value;
      newBox_sports.appendChild(newMessage_sports);
+     newBox_sports.scrollTop = newBox_sports.scrollHeight;
      //message.appendChild(newBox);
      textbox_sports.value = "";
+
    }
 }
 
@@ -26,6 +28,7 @@ function sendAcademics(e) {
      var newMessage_academics = document.createElement("ul");
      newMessage_academics.innerHTML = textbox_academics.value;
      newBox_academics.appendChild(newMessage_academics);
+     newBox_academics.scrollTop = newBox_academics.scrollHeight;
      //message.appendChild(newBox);
      textbox_academics.value = "";
    }
