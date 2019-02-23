@@ -11,6 +11,14 @@ main {
   margin: 0px 0px 0px 0px;
 }
 
+
+#catchathead {
+  text-align: center;
+}
+
+
+
+
 .Categories {
   float: left;
   width: 30%;
@@ -20,8 +28,7 @@ main {
   position: fixed;
 }
 
-#catchathead {
-  text-align: center;
+
 }
 
 .container {
@@ -52,7 +59,8 @@ main {
   width: 100%;
 }
 
-/* Button used to open the chat fromm Academics tab */
+/* Button used to open the chat from Academics tab */
+
 .open-button-academics {
   background-color: orange;
   color: white;
@@ -82,12 +90,12 @@ main {
 
 /* Full-width textarea */
 .form-container textarea {
+
   width: 94%;
   padding: 16px 20px;
   border: none;
   background: #f1f1f1;
   resize: none
-
 }
 
 /* When the textarea gets clicked on, do something */

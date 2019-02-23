@@ -14,7 +14,9 @@
 </div>
 
   <main>
+    
     <h2 id="catchathead">CatChat</h2>
+
     <!--  Sports Chat Room -->
     <div class="chat-popup" id="Sports">
       <div class="form-container" onKeyPress="return sendSports(event)"> <!--  change this from div tag to form tag learn more about a form tag with Django -->
@@ -23,7 +25,7 @@
         <textarea id="textbox_sports" placeholder="Text message.." required></textarea>
         <button id="button_sports" type="submit" class="btn" onclick = "sendSports(0)">Send</button>
         <button type="button" class="btn cancel" onclick="closeSports()">Close</button>
-    </div>
+
     </div>
 
     <!--  Academics Chat Room -->
@@ -34,7 +36,8 @@
         <textarea id="textbox_academics" placeholder="Text message.." required></textarea>
         <button id="button_academics" type="submit" class="btn" onclick = "sendAcademics(0)">Send</button>
         <button type="button" class="btn cancel" onclick="closeAcademics()">Close</button>
-      </div>
+    </div>
+
     </div>
 
   <script src="script.js"></script>
