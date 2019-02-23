@@ -11,14 +11,13 @@ main {
   margin: 0px 0px 0px 0px;
 }
 
-
 #catchathead {
   text-align: center;
 }
 
-
-
-
+#catergory_title{
+  text-align: center;
+}
 .Categories {
   float: left;
   width: 30%;
@@ -28,19 +27,18 @@ main {
   position: fixed;
 }
 
-
-}
-
 .container {
   border: 2px solid purple;
   background-color: white;
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px 10px 10px 20px;
+  padding-top: 10px;
+  margin: 0px 10px 10px 10px;
+  max-width: 675px;
+  width:100%;
+  height: 255px;
+  max-height: 255px;
+  overflow-y: scroll;
   display: inline-block;
-  max-width: 90%;
-  width:90%;
-  height 100%;
 }
 
 .darker {
@@ -78,7 +76,6 @@ main {
   max-width: 80%;
   border: 3px solid #f1f1f1;
   height: 100%;
-  margin-top: 30px;
 }
 
 /* Add styles to the form container */
@@ -90,12 +87,11 @@ main {
 
 /* Full-width textarea */
 .form-container textarea {
-
   width: 94%;
-  padding: 16px 20px;
+  padding: 8px 20px;
   border: none;
   background: #f1f1f1;
-  resize: none
+  resize: none;
 }
 
 /* When the textarea gets clicked on, do something */
@@ -113,7 +109,7 @@ main {
   cursor: pointer;
   width: 100%;
   opacity: 0.8;
-  margin-top: 225px;
+/*  margin-top: 225px;*/
 }
 
 /* Add a red background color to the cancel button */
