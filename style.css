@@ -1,35 +1,27 @@
 body {
   margin: 0px 0px 0px 0px;
-  max-width: auto;
+  height: auto;
 }
 
 main {
   float: right;
-  padding: 10.558px;
-  width: 65%;
-  background-color: #f1f1f1;
-  height: 568px;
+  width: 70%;
+  background-color: blue;
+  height: 100%;
   margin: 0px 0px 0px 0px;
-}
-
-#catchathead {
-  text-align: center;
-}
-
-#button {
-  margin: 10px;
-  width: 20%;
-  margin-left: 40%;
-  margin-right: 30%
 }
 
 .Categories {
   float: left;
   width: 30%;
   margin: 0px 0px 0px 0px;
-  height: 568px;
+  height: 100%;
   background: #ccc;
-  padding: 21px;
+  position: fixed;
+}
+
+#catchathead {
+  text-align: center;
 }
 
 .container {
@@ -49,51 +41,56 @@ main {
   background-color: #ddd;
 }
 
-/* Button used to open the chat form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
+/* Button used to open the chat form Sports tab */
+.open-button-sports {
+  background-color: red;
   color: white;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
+  width: 100%;
+}
+
+/* Button used to open the chat fromm Academics tab */
+.open-button-academics {
+  background-color: orange;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 100%;
 }
 
 /* The popup chat - hidden by default */
 .chat-popup {
   display: none;
   margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
-  bottom: 0;
-  right: 15px;
+  max-width: 80%;
   border: 3px solid #f1f1f1;
-  z-index: 9;
+  height: 100%;
+  margin-top: 30px;
 }
 
 /* Add styles to the form container */
 .form-container {
-  max-width: 300px;
   padding: 10px;
   background-color: white;
+  height: 100%;
 }
 
 /* Full-width textarea */
 .form-container textarea {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
+  width: 94%;
+  padding: 16px 20px;
   border: none;
   background: #f1f1f1;
-  resize: none;
-  min-height: 200px;
+  resize: none
+
 }
 
-/* When the textarea gets focus, do something */
+/* When the textarea gets clicked on, do something */
 .form-container textarea:focus {
   background-color: #ddd;
   outline: none;
@@ -103,92 +100,18 @@ main {
 .form-container .btn {
   background-color: #4CAF50;
   color: white;
-  padding: 16px 20px;
+  padding: 14px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
   opacity: 0.8;
+  margin-top: 225px;
 }
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
-}
-
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-/* Button used to open the chat form - fixed at the bottom of the page */
-.open-button {
-  background-color: #555;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  opacity: 0.8;
-  position: fixed;
-  bottom: 23px;
-  right: 28px;
-  width: 280px;
-}
-
-/* The popup chat - hidden by default */
-.chat-popup {
-  display: none;
-  margin: 0 auto;
-  max-width: 800px;
-  padding: 0 20px;
-  bottom: 0;
-  right: 15px;
-  border: 3px solid #f1f1f1;
-  z-index: 9;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-}
-
-/* Full-width textarea */
-.form-container textarea {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-  resize: none;
-  min-height: 200px;
-}
-
-/* When the textarea gets focus, do something */
-.form-container textarea:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/send button */
-.form-container .btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
+  margin-top: 0px;
 }
 
 /* Add some hover effects to buttons */
