@@ -1,12 +1,12 @@
 body {
   margin: 0px 0px 0px 0px;
-  height: auto;
+  max-width: auto;
 }
 
 main {
   float: right;
   width: 70%;
-  background-color: blue;
+  background-color: #f1f1f1;
   height: 100%;
   margin: 0px 0px 0px 0px;
 }
@@ -15,20 +15,17 @@ main {
   text-align: center;
 }
 
-#catergory_title{
-  text-align: center;
-}
 .Categories {
   float: left;
   width: 30%;
   margin: 0px 0px 0px 0px;
-  height: 100%;
+  height: 568px;
   background: #ccc;
+  padding: 21px;
   position: fixed;
 }
 
 .container {
-  border: 2px solid purple;
   background-color: white;
   border-radius: 5px;
   padding-top: 10px;
@@ -38,7 +35,7 @@ main {
   height: 255px;
   max-height: 255px;
   overflow-y: scroll;
-  display: inline-block;
+
 }
 
 .darker {
@@ -57,8 +54,7 @@ main {
   width: 100%;
 }
 
-/* Button used to open the chat from Academics tab */
-
+/* Button used to open the chat form Academics tab */
 .open-button-academics {
   background-color: orange;
   color: white;
@@ -94,7 +90,7 @@ main {
   resize: none;
 }
 
-/* When the textarea gets clicked on, do something */
+/* When the textarea gets focus, do something */
 .form-container textarea:focus {
   background-color: #ddd;
   outline: none;
@@ -104,21 +100,68 @@ main {
 .form-container .btn {
   background-color: #4CAF50;
   color: white;
-  padding: 14px 20px;
+  padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
+  margin-bottom:10px;
   opacity: 0.8;
-/*  margin-top: 225px;*/
 }
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
   background-color: red;
-  margin-top: 0px;
 }
 
 /* Add some hover effects to buttons */
 .form-container .btn:hover, .open-button:hover {
   opacity: 1;
+}
+
+/* this is stuff from the Website Matt Sent to us */
+
+#list_section {
+  text-align: center;
+}
+
+h1 {
+  color: orange;
+  margin: 0px auto;
+  padding: 20px;
+}
+
+ul {
+  padding: 0px;
+  width: 96%;
+  display: inline-block;
+}
+
+li {
+  background-color: MediumSpringGreen	;
+  color: #000;
+  font-size: 20px;
+  list-style-type: none;
+  width: 100%;
+  margin: 0px auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+
+input[type=text], select {
+  width: 94%;
+  padding: 8px 20px;
+  border: none;
+  background-color: #ddd;
+  resize: none;
+}
+
+input[type='submit'] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.8;
 }
