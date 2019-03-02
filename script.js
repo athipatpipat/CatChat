@@ -1,20 +1,33 @@
-// Append the text into the box in Sports Chat & Send Text Once Click Enter
-//var messages_sports = document.getElementById("messages_sports");
-var button_sports = document.getElementById("button_sports");
-var textbox_sports = document.getElementById("textbox_sports");
+// function for sport
 
-function sendSports(e) {
-   if((e && e.keyCode == 13) || e == 0) {
-     var newBox_sports = document.getElementById("box_sports")
-     var newMessage_sports = document.createElement("ul");
-     newMessage_sports.innerHTML = textbox_sports.value;
-     newBox_sports.appendChild(newMessage_sports);
-     newBox_sports.scrollTop = newBox_sports.scrollHeight;
-     //message.appendChild(newBox);
-     textbox_sports.value = "";
+// This is Matt's Way
+/*$(function() {
 
-   }
-}
+  var $list, $newItemForm;
+  $list = $('ul');
+  $newItemForm = $('#newItemForm');
+
+
+  $("#add").click(function(){
+        var text = $('#itemField').val();
+        $list.append('<li>' + text + '</li>');
+        $('#itemField').val('');
+    });
+});*/
+
+$(function() {
+  /*var $newBox_sports document.getElementById("box_sports")*/
+  var $list, $newItemForm;
+  $list = $('ul');
+  $newItemForm = $('#newItemForm');
+  $newItemForm.on('submit', function(e) {
+    e.preventDefault();
+    var text = $('input:text').val();
+    $list.append('<li>' + text + '</li>');
+    $('#box_sports').scrollTop($('#box_sports')[0].scrollHeight);
+    $('input:text').val('');
+  });
+});
 
 
 // Append the text into the box in Academics Chat & Send Text Once Click Enter
@@ -28,20 +41,10 @@ function sendAcademics(e) {
      var newMessage_academics = document.createElement("ul");
      newMessage_academics.innerHTML = textbox_academics.value;
      newBox_academics.appendChild(newMessage_academics);
-     newBox_academics.scrollTop = newBox_academics.scrollHeight;
      //message.appendChild(newBox);
      textbox_academics.value = "";
    }
 }
-
-/*button1.addEventListener("click", function(){
-  var newBox1 = document.getElementById("box1")
-  var newMessage1 = document.createElement("ul");
-  newMessage1.innerHTML = textbox1.value;
-  newBox1.appendChild(newMessage1);
-  //message.appendChild(newBox);
-  textbox1.value = "";
-});*/
 
 // Sports Chat Window Popup
 function openSports() {
