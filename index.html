@@ -14,29 +14,31 @@
     </div>
   <main>
     <h2 id="catchathead">CatChat</h2>
+
     <!--  Sports Chat Room -->
     <div class="chat-popup" id="Sports">
       <h1> Sports </h1>
-        <li id = "box_sports" class="container darker">
-          <ul></ul>  <!-- Need this thing so that the list can append to something-->
-        </li>
-        <form id="newItemForm">
-          <input type="text" placeholder="Text message..." required/>
-          <input type="submit" id="add" value="Send"/>
-          <!--<input class="btn" type="button" id="add"/> This is Matt Way -->
+        <div id = "box_sports" class="container darker">
+          <ul id = "message_sports"></ul>  <!-- Need this thing so that the list can append to something-->
+        </div>
+        <form id="newItemFormSports">
+          <input id= "newTextSports" type="text" placeholder="Text message..." required/>
+          <input type="submit" value="Send"/>
         </form>
     </div>
 
     <!--  Academics Chat Room -->
     <div class="chat-popup" id="Academics">
-      <div class="form-container" onKeyPress="return sendAcademics(event)"> <!--  change this from div tag to form tag learn more about a form tag with Django -->
-        <h1> Academics </h1>
-        <div id = "box_academics" class="container darker"></div>
-        <textarea id="textbox_academics" placeholder="Text message.." required></textarea>
-        <button id="button_academics" type="submit" class="btn" onclick = "sendAcademics(0)">Send</button>
-        <button type="button" class="btn cancel" onclick="closeAcademics()">Close</button>
+      <h1> Academics </h1>
+        <div id = "box_academics" class="container darker">
+          <ul id = "message_academics"></ul>  <!-- Need this thing so that the list can append to something-->
+        </div>
+        <form id="newItemFormAcademics">
+          <input id= "newTextAcademics" type="text" placeholder="Text message..." required/>
+          <input type="submit" value="Send"/>
+        </form>
     </div>
-    </div>
+
     <script
     src="https://code.jquery.com/jquery-3.3.1.js"
     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="

@@ -118,6 +118,7 @@ main {
   opacity: 1;
 }
 
+
 /* this is stuff from the Website Matt Sent to us */
 
 #list_section {
@@ -132,8 +133,9 @@ h1 {
 
 ul {
   padding: 0px;
-  width: 96%;
   display: inline-block;
+  max-width: 96%;
+  width: 96%;
 }
 
 li {
