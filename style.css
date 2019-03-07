@@ -139,6 +139,7 @@ ul {
 }
 
 li {
+  overflow-wrap: break-word;
   background-color: MediumSpringGreen	;
   color: #000;
   font-size: 20px;
