@@ -49,10 +49,12 @@ $(function AcademicsFunction() {
 function openSports() {
   document.getElementById("Sports").style.display = "block";
   document.getElementById("Academics").style.display = "none";
+  document.getElementById("catchathead").style.display = "none";
 }
 
 // Academics Chat Window Popup
 function openAcademics() {
   document.getElementById("Academics").style.display = "block";
   document.getElementById("Sports").style.display = "none";
+  document.getElementById("catchathead").style.display = "none";
 }
