@@ -55,10 +55,12 @@ main {
   background-color: #ddd;
   padding-top: 10px;
   margin: 0px 10px 10px 10px;
-  max-width: 675px;
+  /*max-width: 675px;*/
+  max-width: 100%;
   width:100%;
-  height: 255px;
-  max-height: 255px;
+  height: 70%;
+  /*height: 255px;
+  max-height: 255px;*/
   position: relative;
   overflow-y: scroll;
 }
