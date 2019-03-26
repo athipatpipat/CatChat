@@ -49,12 +49,14 @@ $(function AcademicsFunction() {
 function openSports() {
   document.getElementById("Sports").style.display = "block";
   document.getElementById("Academics").style.display = "none";
-  document.getElementById("catchathead").style.display = "none";
+  document.getElementById("sports-botton").style.backgroundColor = "pink";
+  document.getElementById("academics-botton").style.backgroundColor = "snow";
 }
 
 // Academics Chat Window Popup
 function openAcademics() {
   document.getElementById("Academics").style.display = "block";
   document.getElementById("Sports").style.display = "none";
-  document.getElementById("catchathead").style.display = "none";
+  document.getElementById("sports-botton").style.backgroundColor = "snow";
+  document.getElementById("academics-botton").style.backgroundColor = "pink";
 }
