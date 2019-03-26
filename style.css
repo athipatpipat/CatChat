@@ -11,90 +11,93 @@ body {
 main {
   height: 100%;
   float: right;
-  width: 70%;
-  background-color: #f1f1f1;
+  width: 75%;
+  background-color: Lavender;
   margin: 0px 0px 0px 0px;
-}
-
-#catchathead {
-  text-align: center;
-  height: 0;
-  margin: 0 auto;
-  padding-top: 5px;
-  font-size: 50px;
 }
 
 .Categories {
   float: left;
-  width: 30%;
+  width: 25%;
   margin: 0px 0px 0px 0px;
   height: 100%;
-  background: #ccc;
+  background: Snow;
   position: fixed;
 }
 
-/* this is our old container
-/*.container {
-  background-color: white;
-  border-radius: 5px;
-  padding-top: 10px;
-  margin: 0px 10px 10px 10px;
-  max-width: 675px;
-  width:100%;
-  height: 255px;
-  max-height: 255px;
-  overflow-y: scroll;
 
+h1 {
+  font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+  overflow: hidden;
+  color: White;
+  margin: 0px auto;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  text-align: center;
+  background-color: RebeccaPurple	;
 }
-
-.darker {
-  border-color: purple;
-  background-color: #ddd;
-}*/
 
 .container {
-  background-color: #ddd;
-  padding-top: 10px;
-  margin: 0px 10px 10px 10px;
-  /*max-width: 675px;*/
-  max-width: 100%;
+  background-color: white;
+  /*padding-top: 10px;*/
+  /*max-width: 100%;*/
   width:100%;
-  height: 70%;
-  /*height: 255px;
-  max-height: 255px;*/
+  height: 87.5%;
   position: relative;
   overflow-y: scroll;
+  float: right;
 }
+
 /* Button used to open the chat form Sports tab */
 .open-button-sports {
-  background-color: red;
-  color: white;
+  font-family: Tahoma, Verdana, sans-serif;
+  text-align: center;
+  color: DarkSlateBlue;
+  background-color: snow;
+  font-size: 15px;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   width: 100%;
+  outline: none;
+}
+
+button:hover{
+  background-color: pink;
+}
+
+button:focus{
+    background: pink;
 }
 
 /* Button used to open the chat form Academics tab */
 .open-button-academics {
-  background-color: orange;
-  color: white;
+  font-family: Tahoma, Verdana, sans-serif;
+  text-align: center;
+  font-size: 15px;
+  background-color: Snow;
+  color: DarkSlateBlue;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   opacity: 0.8;
   width: 100%;
+  outline: none;
+}
+
+
+.chat-already-popup {
+  margin: 0 auto;
+  max-width: 100%;
+  height: 100%;
 }
 
 /* The popup chat - hidden by default */
 .chat-popup {
-  position: static;
-  right: 50%;
-  left: 50%;
   display: none;
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 100%;
   height: 100%;
 }
 
@@ -105,20 +108,12 @@ main {
   text-align: center;
 }
 
-h1 {
-  color: orange;
-  margin: 0px auto;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  text-align: center;
-}
-
 ul {
   padding: 0px;
   display: inline-block;
   max-width: 96%;
   position: absolute;
-  right: 2.5%;
+  right: 5%;
   width: 50%;
   height: 10%;
 
@@ -126,8 +121,11 @@ ul {
 
 li {
   overflow-wrap: break-word;
-  background-color: MediumSpringGreen	;
-  color: #000;
+  background-color: RebeccaPurple	;
+  font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: lighter;
+  border-radius: 6px;
+  color: white;
   font-size: 20px;
   list-style-type: none;
   margin: 0px auto;
@@ -137,27 +135,35 @@ li {
   display: inline-block;
   clear:both;
   float: right;
-  max-width: 200px;
+  max-width: 400px;
 }
 
 input[type=text], select {
-  width: 90%;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  width: 67.5%;
+  position: fixed;
+  font-size: 100%;
+  font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  bottom: 0;
+  padding-top: 10px;
+  padding-bottom: 15px;
   border: none;
-  background-color: #ddd;
-  resize: none
-  float: right;
+  resize: none;
+  outline: none;
 }
 
 input[type='submit'] {
-  background-color: #4CAF50;
+  width: 7.5%;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
   color: white;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  background-color: RebeccaPurple;
+  padding-top: 15px;
+  padding-bottom: 15px;
   border: none;
   cursor: pointer;
-  width: 10%;
   opacity: 0.8;
-  float: right;
+  outline: none;
 }
