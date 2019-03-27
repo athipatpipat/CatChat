@@ -43,20 +43,25 @@ $(function AcademicsFunction() {
   });
 });
 
+// changes color of the buttons
+var buttons = $('button');
+buttons.click(function() {
+  buttons.css('background-color', 'snow');
+  $(this).css('background-color', 'pink');
+});
+
 // Append the text into the box in Academics Chat & Send Text Once Click Enter
 
 // Sports Chat Window Popup
 function openSports() {
   document.getElementById("Sports").style.display = "block";
   document.getElementById("Academics").style.display = "none";
-  document.getElementById("sports-botton").style.backgroundColor = "pink";
-  document.getElementById("academics-botton").style.backgroundColor = "snow";
 }
 
 // Academics Chat Window Popup
 function openAcademics() {
   document.getElementById("Academics").style.display = "block";
   document.getElementById("Sports").style.display = "none";
-  document.getElementById("sports-botton").style.backgroundColor = "snow";
-  document.getElementById("academics-botton").style.backgroundColor = "pink";
 }
+
+sports-botton.addEventListener('click', changeColor, false)

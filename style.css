@@ -63,14 +63,6 @@ h1 {
   outline: none;
 }
 
-button:hover{
-  background-color: pink;
-}
-
-button:focus{
-    background: pink;
-}
-
 /* Button used to open the chat form Academics tab */
 .open-button-academics {
   font-family: Tahoma, Verdana, sans-serif;
@@ -86,6 +78,10 @@ button:focus{
   outline: none;
 }
 
+button:hover{
+  background-color: pink !important;
+  opacity: .5;
+}
 
 .chat-already-popup {
   margin: 0 auto;
