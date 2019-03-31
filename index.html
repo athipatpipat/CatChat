@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>CatChat</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+
+    <div class = "Categories">
+      <h1>CATCHAT</h1>
+      <button class="open-button-sports" id= "sports-botton" onclick = "openSports()">Sports</button>
+      <button class="open-button-academics" id= "academics-botton" onclick = "openAcademics()">Academics</button>
+    </div>
+  <main>
+
+    <!--  Sports Chat Room -->
+    <div class= "chat-already-popup" id="Sports">
+      <h1> SPORTS </h1>
+      <div id = "box_sports" class="container">
+        <ul id = "message_sports"></ul>  <!-- Need this thing so that the list can append to something-->
+      </div>
+      <form id="newItemFormSports">
+        <input id= "newTextSports" type="text" placeholder="Type a message..." required autocomplete="off"/>
+        <input type="submit" value="SEND"/>
+      </form>
+    </div>
+
+    <!--  Academics Chat Room -->
+    <div class="chat-popup" id="Academics">
+      <h1> ACADEMICS </h1>
+      <div id = "box_academics" class="container">
+        <ul id = "message_academics"></ul>  <!-- Need this thing so that the list can append to something-->
+      </div>
+      <form id="newItemFormAcademics">
+        <input id= "newTextAcademics" type="text" placeholder="Type a message..." required autocomplete="off"/>
+        <input type="submit" value="SEND"/>
+      </form>
+    </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+    </script>
+    <script src="script.js"></script>
+
+ </main>
+
+</body>
+</html>

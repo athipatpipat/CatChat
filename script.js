@@ -39,17 +39,27 @@ $(function SportsFunction() {
       $('#newTextAcademics').val('');
     });
   });
-  
-  // Append the text into the box in Academics Chat & Send Text Once Click Enter
-  
-  // Sports Chat Window Popup
-  function openSports() {
-    document.getElementById("Sports").style.display = "block";
-    document.getElementById("Academics").style.display = "none";
-  }
-  
-  // Academics Chat Window Popup
-  function openAcademics() {
-    document.getElementById("Academics").style.display = "block";
-    document.getElementById("Sports").style.display = "none";
-  }
+});
+
+// changes color of the buttons
+var buttons = $('button');
+buttons.click(function() {
+  buttons.css('background-color', 'snow');
+  $(this).css('background-color', 'pink');
+});
+
+// Append the text into the box in Academics Chat & Send Text Once Click Enter
+
+// Sports Chat Window Popup
+function openSports() {
+  document.getElementById("Sports").style.display = "block";
+  document.getElementById("Academics").style.display = "none";
+}
+
+// Academics Chat Window Popup
+function openAcademics() {
+  document.getElementById("Academics").style.display = "block";
+  document.getElementById("Sports").style.display = "none";
+}
+
+sports-botton.addEventListener('click', changeColor, false)
