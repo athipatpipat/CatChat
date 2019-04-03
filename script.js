@@ -63,5 +63,3 @@ function openAcademics() {
   document.getElementById("Academics").style.display = "block";
   document.getElementById("Sports").style.display = "none";
 }
-
-sports-botton.addEventListener('click', changeColor, false)
