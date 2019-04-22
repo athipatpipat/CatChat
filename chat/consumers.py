@@ -39,6 +39,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         # Messages will have a "command" key we can switch on
         command = content.get("command", None)
+        print("from receive_json", content)
         try:
             if command == "join":
                 # Make them join the room
@@ -181,6 +182,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room": event["room_id"],
                 "username": event["username"],
                 "message": event["message"],
+                "author": "testuser"
             },
         )
 
