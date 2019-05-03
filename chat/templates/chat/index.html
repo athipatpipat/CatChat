@@ -158,6 +158,9 @@
           // Handle joining. Create the chat window
           // .join is defined in consumers.py
           if (data.join) {
+
+
+
             console.log("Joining room " + data.join);
             var roomdiv = $(
               "<div class='room' id='room-" +
@@ -172,9 +175,7 @@
                 "</div>"
                 );
 
-                
-
-           
+                           
             // add event listener to form
             roomdiv.find("form").on("submit", function() {
               socket.send(
@@ -190,6 +191,8 @@
               return false;
             });
             $("#chats").append(roomdiv);
+
+
             // Handle leaving
           } else if (data.leave) {
             console.log("Leaving room " + data.leave);
@@ -203,8 +206,8 @@
             
           
 
-            // msg types are defined in chat/settings.py
-            // Only for demo purposes is hardcoded, in production scenarios, consider call a service.
+    
+           
             switch (data.msg_type) {
               case 0:
                 // Message
@@ -226,6 +229,7 @@
                   data.message +
                   "</div>";
                 break;
+
               case 2:
                 // Alert / Danger messages
                 ok_msg =
@@ -234,6 +238,7 @@
                   "</div>";
                 break;
               case 3:
+
                 // "Muted" messages
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
@@ -241,6 +246,7 @@
                   "</div>";
                 break;
               case 4:
+
                 // User joined room
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
@@ -248,6 +254,7 @@
                   " joined the room!" +
                   "</div>";
                 break;
+
               case 5:
                 // User left room
                 ok_msg =
@@ -304,12 +311,10 @@
           } else {
             // Join room
             $(this).addClass("joined");
-            //select all room that is not this and leave
-
-          // array =  $().not($(this)).attr("data-room-id");
-
-
-            socket.send(
+          
+            $(".room").not("#room-"+roomId).remove();
+        
+          socket.send(
               JSON.stringify({
                 command: "join",
                 room: roomId
