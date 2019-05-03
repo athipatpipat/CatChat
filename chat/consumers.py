@@ -4,6 +4,7 @@ from channels.generic.websocket import AsyncJsonWebsocketConsumer
 
 from .exceptions import ClientError
 from .utils import get_room_or_error
+from .models import Message
 
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -53,6 +54,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
 
+
     async def disconnect(self, code):
         """
         Called when the WebSocket closes for any reason.
@@ -66,6 +68,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     ##### Command helper methods called by receive_json
 
+
+
+    ##helper to receive_json
     async def join_room(self, room_id):
         """
         Called by receive_json when someone sent a join command.
@@ -95,6 +100,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "title": room.title,
         })
 
+    ##helper to receive_json
     async def leave_room(self, room_id):
         """
         Called by receive_json when someone sent a leave command.
@@ -123,6 +129,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             "leave": str(room.id),
         })
 
+    ##helper to receive_json
     async def send_room(self, room_id, message):
         """
         Called by receive_json when someone sends a message to a room.
@@ -175,6 +182,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat.
         """
+        #edit here to add current author
+        
+
         # Send a message down to the client
         await self.send_json(
             {
@@ -182,10 +192,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room": event["room_id"],
                 "username": event["username"],
                 "message": event["message"],
-                "author": "testuser"
+               
             },
         )
+        """ await Message.objects.create(
+            author= event["username"],
+            content = event["message"],
+        ) """
 
+
+    
 
 
 """ 
