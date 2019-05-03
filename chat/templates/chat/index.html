@@ -125,20 +125,29 @@
        // msgListTag.appendChild(imgTag);
         document.querySelector('#message_sports').appendChild(msgListTag);
       } */
+
+
       $(function() {
+
         // Correctly decide between ws:// and wss://
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var ws_path =
           ws_scheme + "://" + window.location.host + "/chat/stream/";
         console.log("Connecting to " + ws_path);
+        var username = {{username}}; // this is from views.py
+
+        //Creating socket from reconnecting-websocket library
         var socket = new ReconnectingWebSocket(ws_path);
 
-
+        function fetchMessages() {
+        socket.send(JSON.stringify({'command': 'fetch_messages' }));
+      }
 
         // Get incoming messages
         socket.onmessage = function(message) {
           // Decode the JSON
           console.log("Got websocket message " + message.data);
+        
           var data = JSON.parse(message.data);
           // Handle errors
           if (data.error) {
@@ -147,7 +156,11 @@
           }
 
           // Handle joining. Create the chat window
+          // .join is defined in consumers.py
           if (data.join) {
+
+
+
             console.log("Joining room " + data.join);
             var roomdiv = $(
               "<div class='room' id='room-" +
@@ -162,20 +175,24 @@
                 "</div>"
                 );
 
-           
+                           
             // add event listener to form
             roomdiv.find("form").on("submit", function() {
               socket.send(
                 JSON.stringify({
                   command: "send",
                   room: data.join,
-                  message: roomdiv.find("input").val()
+                  message: roomdiv.find("input").val(),
+                  from: username,
+                  
                 })
               );
               roomdiv.find("input").val("");
               return false;
             });
             $("#chats").append(roomdiv);
+
+
             // Handle leaving
           } else if (data.leave) {
             console.log("Leaving room " + data.leave);
@@ -184,13 +201,13 @@
 
             // Handle getting a message
           } else if (data.message || data.msg_type != 0) {
-            var msgdiv = $("#room-" + data.room + " #messages"); //select div in the room 
+            var msgdiv = $("#room-" + data.room + " #messages"); //select div in the correct room 
             var ok_msg = "";
             
           
 
-            // msg types are defined in chat/settings.py
-            // Only for demo purposes is hardcoded, in production scenarios, consider call a service.
+    
+           
             switch (data.msg_type) {
               case 0:
                 // Message
@@ -212,6 +229,7 @@
                   data.message +
                   "</div>";
                 break;
+
               case 2:
                 // Alert / Danger messages
                 ok_msg =
@@ -220,6 +238,7 @@
                   "</div>";
                 break;
               case 3:
+
                 // "Muted" messages
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
@@ -227,6 +246,7 @@
                   "</div>";
                 break;
               case 4:
+
                 // User joined room
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
@@ -234,6 +254,7 @@
                   " joined the room!" +
                   "</div>";
                 break;
+
               case 5:
                 // User left room
                 ok_msg =
@@ -253,6 +274,22 @@
             console.log("Cannot handle message!");
           }
         };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
 
         // Says if we joined a room or not by if there's a div for it
         inRoom = function(roomId) {
@@ -274,12 +311,10 @@
           } else {
             // Join room
             $(this).addClass("joined");
-            //select all room that is not this and leave
-
-          // array =  $().not($(this)).attr("data-room-id");
-
-
-            socket.send(
+          
+            $(".room").not("#room-"+roomId).remove();
+        
+          socket.send(
               JSON.stringify({
                 command: "join",
                 room: roomId
@@ -290,6 +325,7 @@
 
         // Helpful debugging
         socket.onopen = function() {
+          //fetch_message(); 
           console.log("Connected to chat socket");
         };
         socket.onclose = function() {

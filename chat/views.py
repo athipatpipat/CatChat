@@ -29,4 +29,5 @@ def index(request):
     # Render that in the index template
     return render(request, "chat/index.html", {
         "rooms": rooms,
+        'username': mark_safe(json.dumps(request.user.username)),
     }) 
