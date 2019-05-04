@@ -252,13 +252,11 @@
           }
         };
 
-        function pageScroll() {
-          window.scrollBy(0,1);
-          scrolldelay = setTimeout(pageScroll,10);
-        }
-
-
-
+        var buttons = $('.channel-button');
+        buttons.click(function() {
+          buttons.css('background-color', 'snow');
+          $(this).css('background-color', 'pink');
+        });
 
 
         // Says if we joined a room or not by if there's a div for it
