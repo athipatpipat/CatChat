@@ -59,6 +59,7 @@ h1 {
     margin: 0px auto;
     text-align: center;
     background-color: RebeccaPurple;
+    padding-bottom: 3px;
 }
 
 
@@ -101,7 +102,6 @@ select {
     resize: none;
     outline: none;
     margin-top: 1%;
-
 }
 
 #chats {
@@ -191,9 +191,9 @@ li{
   display: inline-block;
   clear: both;
   float: right;
-  border-radius: 20px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  border-radius: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   max-width: 400px;
   margin-right: 10px;
   margin-top: 5px;
@@ -214,9 +214,9 @@ li{
   display: inline-block;
   clear: both;
   float: left;
-  border-radius: 20px;
-  padding-top: 0px;
-  padding-bottom: 0px;
+  border-radius: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   max-width: 400px;
   margin-left: 10px;
   margin-top: 5px;
