@@ -258,7 +258,19 @@
                     //fetch old messages from database
                   
                 for(var i =0; i<data.past_messages.length; i++){
-                  ok_msg = ok_msg + "<li class='sent'><p>" + data.past_messages[i].content + "</p></li>"
+                  
+
+                  if (current_user == data.past_messages[i].author) {
+                    next_msg =
+                    "<li class='sent'><p>" + data.past_messages[i].content + "</p></li>"
+                  } else {
+                    next_msg =
+                    "<li class='replies'><p>" + data.past_messages[i].content+ "</p></li>"
+                  }
+                  
+                 
+
+                  ok_msg = ok_msg + next_msg;
                 }    
                 
               
