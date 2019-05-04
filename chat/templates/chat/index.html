@@ -205,18 +205,11 @@
               room: data.join,
   
             }))
-            //console.log("Past messages:" + data.past_messages[0])
-
+           
             // Handle leaving
           } else if (data.leave) {
             console.log("Leaving room " + data.leave);
             $("#room-" + data.leave).remove();
-
-
-          } else if(data.msg_type == 10){
-            var msgdiv = $("#room-" + data.room + " #messages");
-            ok_msg = data.past_messages.content[0];
-            msgdiv.append(ok_msg);
 
           
             // Handle getting a message

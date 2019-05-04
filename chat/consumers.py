@@ -1,11 +1,12 @@
 from django.conf import settings
 
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-
+from django.contrib.auth import get_user_model
 from .exceptions import ClientError
 from .utils import get_room_or_error
 from .models import Message
 
+User = get_user_model()
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     """
@@ -49,7 +50,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # Leave the room
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])
+                await self.send_room(content["room"], content["message"], content["from"])
             elif command == "fetch":
                 print("fetch from consumers.py")
                 await self.fetch_msg(content["room"])
@@ -133,10 +134,18 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
     ##helper to receive_json
-    async def send_room(self, room_id, message):
+    async def send_room(self, room_id, message, author):
         """
         Called by receive_json when someone sends a message to a room.
         """
+        author_user = User.objects.filter(username=author)[0]
+
+        Message.objects.create(
+            author= author_user,
+            content = message,
+        )
+
+
         # Check they are in this room
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
