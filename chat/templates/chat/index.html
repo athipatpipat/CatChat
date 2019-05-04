@@ -256,7 +256,12 @@
                 break;
               case 6:
                     //fetch old messages from database
-                ok_msg = "<li class='sent'><p>" + data.past_messages[0].content + "</p></li>"
+                  
+                for(var i =0; i<data.past_messages.length; i++){
+                  ok_msg = ok_msg + "<li class='sent'><p>" + data.past_messages[i].content + "</p></li>"
+                }    
+                
+              
                 
 
                 break;
