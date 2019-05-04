@@ -259,13 +259,23 @@
                   
                 for(var i =0; i<data.past_messages.length; i++){
                   
+                  
 
                   if (current_user == data.past_messages[i].author) {
-                    next_msg =
+                    if(data.room == data.past_messages[i].room_number){
+                      next_msg =
                     "<li class='sent'><p>" + data.past_messages[i].content + "</p></li>"
+                    }
+                    else{
+                      next_msg = ""
+                    }
+                   
                   } else {
-                    next_msg =
-                    "<li class='replies'><p>" + data.past_messages[i].content+ "</p></li>"
+                    if(data.room == data.past_messages[i].room_number){
+                      next_msg =
+                    "<li class='replies'><p>" + data.past_messages[i].content + "</p></li>"
+                    }
+                    next_msg = ""
                   }
                   
                  

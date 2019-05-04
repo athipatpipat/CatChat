@@ -143,6 +143,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         Message.objects.create(
             author= author_user,
             content = message,
+            room_number = room_id,
         )
 
 
@@ -190,6 +191,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         return {
             'author': message.author.username,
             'content': message.content,
+            'room_number': message.room_number,
             'timestamp': str(message.timestamp)
         }   
 
