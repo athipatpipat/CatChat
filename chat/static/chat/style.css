@@ -16,10 +16,10 @@ body {
     background-color: pink;
 }
 
-    .replies li {
-        float: left;
-        background-color: pink;
-    }
+.replies li {
+    float: left;
+    background-color: pink;
+}
 
 main {
     height: 100%;
@@ -57,8 +57,6 @@ h1 {
     overflow: hidden;
     color: White;
     margin: 0px auto;
-    padding-top: 5px;
-    padding-bottom: 10px;
     text-align: center;
     background-color: RebeccaPurple;
 }
@@ -102,6 +100,8 @@ select {
     border: none;
     resize: none;
     outline: none;
+    margin-top: 1%;
+
 }
 
 #chats {
@@ -109,74 +109,90 @@ select {
     height: 100%;
 }
 
-    #chats .room {
-        width: 100%;
-        height: 85%;
-    }
+#chats .room {
+  width: 100%;
+  height: 100%;
+}
 
-    #chats h2 {
-        color: #333;
-        font-weight: bold;
-    }
+#chats h2 {
+  color: #333;
+  font-weight: bold;
+}
 
-    #chats .messages {
-        height: 100%;
-        overflow: auto;
-        background: #eee;
-    }
+#chats .messages {
+  height: 85%;
+  overflow: auto;
+  background: #eee;
+}
 
-    #chats .username {
-        display: inline-block;
-        color: #C07A36;
-        width: 100px;
-        font-weight: bold;
-    }
+form {
+  height: 8%;
+  text-align: center;
+  margin: 0 auto;
+}
 
-    #chats .contextual-message {
-        text-align: center;
-    }
+#chats .username {
+  display: inline-block;
+  color: #C07A36;
+  width: 100px;
+  font-weight: bold;
+}
 
-    #chats .text-muted {
-        opacity: .6;
-        font-style: italic;
-    }
+#chats .contextual-message {
+  text-align: center;
+  font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  color: gray;
+}
 
-    #chats .text-danger {
-        color: #a94442;
-        font-weight: bold;
-    }
+#chats .text-muted {
+  opacity: .6;
+  font-style: italic;
+}
 
-    #chats .text-warning {
-        color: #DCAD5C;
-        font-weight: bold;
-        font-style: italic;
-    }
+#chats .text-danger {
+  color: #a94442;
+  font-weight: bold;
+}
+
+#chats .text-warning {
+  color: #DCAD5C;
+  font-weight: bold;
+  font-style: italic;
+}
 
 
 ul {
-    padding: 0px;
-    display: inline-block;
-    max-width: 96%;
-    position: relative;
-    width: 100%;
-    height: 50px;
+  padding: 0px;
+  display: inline-block;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 0px
 }
 
-li {
-    overflow-wrap: break-word;
-    background-color: RebeccaPurple;
-    font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-    font-weight: lighter;
-    border-radius: 6px;
-    color: white;
-    font-size: 20px;
-    list-style-type: none;
-    margin: 0px auto;
-    padding: 10px;
-    /*  margin-bottom: 10px;*/
-    opacity: 0.8;
-    display: inline-block;
-    clear: both;
-    float: right;
-    max-width: 400px;
+li{
+  margin: 0px;
+}
+
+.sent {
+  overflow-wrap: break-word;
+  background-color: RebeccaPurple;
+  font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: lighter;
+  border-radius: 6px;
+  color: white;
+  font-size: 20px;
+  list-style-type: none;
+  margin: 0px auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  opacity: 0.8;
+  display: inline-block;
+  clear: both;
+  float: right;
+  border-radius: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  max-width: 400px;
 }

@@ -34,22 +34,20 @@
           <a href="{% url 'admin:index' %}">admin</a>?
         </p>
         {% endfor %}
-
-        </button>
       </ul>
     </div>
     <main>
 
 
       <div id="chats">
-        
+
       </div>
 
 
 
 
         <!-- <input id="chat-message-submit" type="submit" value="SEND"/> -->
-      </div> 
+      </div>
 
 
     </main>
@@ -148,7 +146,7 @@
         socket.onmessage = function(message) {
           // Decode the JSON
           console.log("Got websocket message " + message.data);
-        
+
           var data = JSON.parse(message.data);
           // Handle errors
           if (data.error) {
@@ -171,12 +169,12 @@
                 data.title +
                 "</h1>" +
                 "<div class='messages'>"+ "<ul id='messages'>" + "</ul>" + "</div>" +
-              
+
                 "<form><input type='text' placeholder='Type a message...'></form>" +
                 "</div>"
                 );
 
-                           
+
             // add event listener to form
             roomdiv.find("form").on("submit", function() {
               socket.send(
@@ -185,7 +183,7 @@
                   room: data.join,
                   message: roomdiv.find("input").val(),
                   from: current_user,
-                  
+
                 })
               );
               roomdiv.find("input").val("");
@@ -202,18 +200,18 @@
 
             // Handle getting a message
           } else if (data.message || data.msg_type != 0) {
-            var msgdiv = $("#room-" + data.room + " #messages"); //select div in the correct room 
+            var msgdiv = $("#room-" + data.room + " #messages"); //select div in the correct room
             var ok_msg = "";
-            
-          
 
-    
-           
+
+
+
+
             switch (data.msg_type) {
               case 0:
                 // Message
                from = data.username;
-                
+
                 if (current_user == from) {
                   ok_msg =
                   "<li class='sent'><p>" + data.message + "</p></li>"
@@ -247,12 +245,18 @@
                 return;
             }
             msgdiv.append(ok_msg);
-
             msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+            $('.messages').scrollTop($('.messages')[0].scrollHeight);
           } else {
             console.log("Cannot handle message!");
           }
         };
+
+        function pageScroll() {
+          window.scrollBy(0,1);
+          scrolldelay = setTimeout(pageScroll,10);
+        }
+
 
 
 
@@ -277,9 +281,11 @@
           } else {
             // Join room
             $(this).addClass("joined");
-          
+
             $(".room").not("#room-"+roomId).remove();
-        
+
+
+
           socket.send(
               JSON.stringify({
                 command: "join",
@@ -291,7 +297,7 @@
 
         // Helpful debugging
         socket.onopen = function() {
-          //fetch_message(); 
+          //fetch_message();
           console.log("Connected to chat socket");
         };
         socket.onclose = function() {
