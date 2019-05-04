@@ -141,7 +141,8 @@
         var socket = new ReconnectingWebSocket(ws_path);
 
         function fetchMessages() {
-        socket.send(JSON.stringify({'command': 'fetch_messages' }));
+          console.log("this is fetchMessages");
+        socket.send(JSON.stringify({'command': 'fetch' }));
       }
 
         // Get incoming messages
@@ -150,6 +151,9 @@
           console.log("Got websocket message " + message.data);
         
           var data = JSON.parse(message.data);
+
+          
+
           // Handle errors
           if (data.error) {
             alert(data.error);
@@ -176,6 +180,9 @@
                 "</div>"
                 );
 
+
+             //fetch message here?   
+            
                            
             // add event listener to form
             roomdiv.find("form").on("submit", function() {
@@ -193,6 +200,12 @@
             });
             $("#chats").append(roomdiv);
 
+            socket.send(JSON.stringify({
+              command: "fetch",
+              room: data.join,
+  
+            }))
+            //console.log("Past messages:" + data.past_messages[0])
 
             // Handle leaving
           } else if (data.leave) {
@@ -200,14 +213,20 @@
             $("#room-" + data.leave).remove();
 
 
+          } else if(data.msg_type == 10){
+            var msgdiv = $("#room-" + data.room + " #messages");
+            ok_msg = data.past_messages.content[0];
+            msgdiv.append(ok_msg);
+
+          
             // Handle getting a message
           } else if (data.message || data.msg_type != 0) {
             var msgdiv = $("#room-" + data.room + " #messages"); //select div in the correct room 
             var ok_msg = "";
             
-          
-
-    
+            
+            
+            
            
             switch (data.msg_type) {
               case 0:
@@ -241,6 +260,12 @@
                   data.username +
                   " left the room!" +
                   "</div>";
+                break;
+              case 6:
+                    //fetch old messages from database
+                ok_msg = "<li class='sent'><p>" + data.past_messages[0].content + "</p></li>"
+                
+
                 break;
               default:
                 console.log("Unsupported message type!");
@@ -279,8 +304,11 @@
             $(this).addClass("joined");
           
             $(".room").not("#room-"+roomId).remove();
-        
-          socket.send(
+            
+         // socket.send(JSON.stringify({'command': 'fetch' }));
+
+
+            socket.send(
               JSON.stringify({
                 command: "join",
                 room: roomId
@@ -291,7 +319,6 @@
 
         // Helpful debugging
         socket.onopen = function() {
-          //fetch_message(); 
           console.log("Connected to chat socket");
         };
         socket.onclose = function() {

@@ -50,6 +50,9 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 await self.leave_room(content["room"])
             elif command == "send":
                 await self.send_room(content["room"], content["message"])
+            elif command == "fetch":
+                print("fetch from consumers.py")
+                await self.fetch_msg(content["room"])
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -149,6 +152,39 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             }
         )
 
+
+    async def fetch_msg(self,room_id):
+         ##fetch message from database
+        load_message = Message.last_10_messages()
+        formatted_message = self.messages_to_json(load_message)
+        
+
+        room = await get_room_or_error(room_id, self.scope["user"])
+        await self.channel_layer.group_send(
+             room.group_name,
+             {
+                 "type": "chat.fetch",
+                 "room_id": room_id,
+                 "past_messages": formatted_message,
+
+             }
+         )
+
+    ##helper to get_msg
+    def messages_to_json(self, messages):
+        result = []
+        for message in messages:
+            result.append(self.message_to_json(message))
+        return result
+
+    def message_to_json(self, message):
+        return {
+            'author': message.author.username,
+            'content': message.content,
+            'timestamp': str(message.timestamp)
+        }   
+
+
     ##### Handlers for messages sent over the channel layer
 
     # These helper methods are named by the types we send - so chat.join becomes chat_join
@@ -199,6 +235,16 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             author= event["username"],
             content = event["message"],
         ) """
+
+    async def chat_fetch(self, event):
+        await self.send_json(
+            {
+                "msg_type": settings.MSG_TYPE_OLD_MSG,
+                "room": event["room_id"],
+                "past_messages": event["past_messages"],
+            }
+            
+        )
 
 
     
