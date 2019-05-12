@@ -59,7 +59,7 @@ h1 {
     margin: 0px auto;
     text-align: center;
     background-color: RebeccaPurple;
-    padding-bottom: 3px;
+    padding-bottom: 4px;
 }
 
 
@@ -197,6 +197,7 @@ li{
   max-width: 400px;
   margin-right: 10px;
   margin-top: 5px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 .replies {
@@ -220,4 +221,5 @@ li{
   max-width: 400px;
   margin-left: 10px;
   margin-top: 5px;
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
