@@ -1,11 +1,12 @@
 from django.conf import settings
 
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
-
+from django.contrib.auth import get_user_model
 from .exceptions import ClientError
 from .utils import get_room_or_error
 from .models import Message
 
+User = get_user_model()
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
     """
@@ -49,7 +50,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 # Leave the room
                 await self.leave_room(content["room"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"])
+                await self.send_room(content["room"], content["message"], content["from"])
+            elif command == "fetch":
+                print("fetch from consumers.py")
+                await self.fetch_msg(content["room"])
         except ClientError as e:
             # Catch any errors and send it back
             await self.send_json({"error": e.code})
@@ -130,10 +134,19 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
     ##helper to receive_json
-    async def send_room(self, room_id, message):
+    async def send_room(self, room_id, message, author):
         """
         Called by receive_json when someone sends a message to a room.
         """
+        author_user = User.objects.filter(username=author)[0]
+
+        Message.objects.create(
+            author= author_user,
+            content = message,
+            room_number = room_id,
+        )
+
+
         # Check they are in this room
         if room_id not in self.rooms:
             raise ClientError("ROOM_ACCESS_DENIED")
@@ -148,6 +161,42 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "message": message,
             }
         )
+
+
+    async def fetch_msg(self,room_id):
+         ##fetch message from database
+        load_message = Message.last_10_messages()
+        formatted_message = self.messages_to_json(load_message)
+        
+
+        room = await get_room_or_error(room_id, self.scope["user"])
+        await self.send_json(
+            {
+                "msg_type": settings.MSG_TYPE_OLD_MSG,
+                "room": room_id,
+                "past_messages": formatted_message,
+            }
+            
+        )
+
+
+
+
+    ##helper to get_msg
+    def messages_to_json(self, messages):
+        result = []
+        for message in messages:
+            result.append(self.message_to_json(message))
+        return result
+
+    def message_to_json(self, message):
+        return {
+            'author': message.author.username,
+            'content': message.content,
+            'room_number': message.room_number,
+            'timestamp': str(message.timestamp)
+        }   
+
 
     ##### Handlers for messages sent over the channel layer
 
@@ -200,86 +249,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             content = event["message"],
         ) """
 
-
-    
-
-
-""" 
-
-User = get_user_model()
-
-class ChatConsumer(WebsocketConsumer):
-
-    def fetch_messages(self, data):
-        messages = Message.last_10_messages()
-        content = {
-            'command': 'messages',
-            'messages': self.messages_to_json(messages)
-        }
-        self.send_message(content)
-
-    def new_message(self, data):
-        author = data['from']
-        author_user = User.objects.filter(username=author)[0]
-        message = Message.objects.create(
-            author=author_user, 
-            content=data['message'])
-        content = {
-            'command': 'new_message',
-            'message': self.message_to_json(message)
-        }
-        return self.send_chat_message(content)
-
-    def messages_to_json(self, messages):
-        result = []
-        for message in messages:
-            result.append(self.message_to_json(message))
-        return result
-
-    def message_to_json(self, message):
-        return {
-            'author': message.author.username,
-            'content': message.content,
-            'timestamp': str(message.timestamp)
-        }
-
-    commands = {
-        'fetch_messages': fetch_messages,
-        'new_message': new_message
-    }
-
-    def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']['room_name']
-        self.room_group_name = 'chat_%s' % self.room_name
-        async_to_sync(self.channel_layer.group_add)(
-            self.room_group_name,
-            self.channel_name
-        )
-        self.accept()
-
-    def disconnect(self, close_code):
-        async_to_sync(self.channel_layer.group_discard)(
-            self.room_group_name,
-            self.channel_name
-        )
-
-    def receive(self, text_data):
-        data = json.loads(text_data)
-        self.commands[data['command']](self, data)
-        
-
-    def send_chat_message(self, message):    
-        async_to_sync(self.channel_layer.group_send)(
-            self.room_group_name,
+    async def chat_fetch(self, event):
+        await self.send_json(
             {
-                'type': 'chat_message',
-                'message': message
+                "msg_type": settings.MSG_TYPE_OLD_MSG,
+                "room": event["room_id"],
+                "past_messages": event["past_messages"],
             }
+            
         )
-
-    def send_message(self, message):
-        self.send(text_data=json.dumps(message))
-
-    def chat_message(self, event):
-        message = event['message']
-        self.send(text_data=json.dumps(message)) """

@@ -52,76 +52,7 @@
     </main>
 
     <script>
-      /*  var roomName = {{ room_name_json }};
-      var username = {{ username }};
 
-      var chatSocket = new ReconnectingWebSocket(
-          'ws://' + window.location.host +
-          '/ws/chat/' + roomName + '/');
-
-      chatSocket.onopen = function(e) {
-        fetchMessages();
-      }
-
-      chatSocket.onmessage = function(e) {
-          var data = JSON.parse(e.data);
-          if (data['command'] === 'messages') {
-            for (let i=0; i<data['messages'].length; i++) {
-              createMessage(data['messages'][i]);
-            }
-          } else if (data['command'] === 'new_message'){
-            createMessage(data['message']);
-          }
-      };
-
-      chatSocket.onclose = function(e) {
-          console.error('Chat socket closed unexpectedly');
-      };
-
-      document.querySelector('#newTextSports').onkeyup = function(e) {
-          if (e.keyCode === 13) {  // enter, return
-              document.querySelector('#chat-message-submit').click();
-          }
-      };
-
-      document.querySelector('#chat-message-submit').onclick = function(e) {
-          var messageInputDom = document.getElementById('newTextSports');
-          var message = messageInputDom.value;
-          chatSocket.send(JSON.stringify({
-              'command': 'new_message',
-              'message': message,
-              'from': username
-          }));
-
-          messageInputDom.value = '';
-      };
-
-      function fetchMessages() {
-        chatSocket.send(JSON.stringify({'command': 'fetch_messages' }));
-      }
-
-      function createMessage(data) {
-        var author = data['author'];
-        var msgListTag = document.createElement('li');
-       // var imgTag = document.createElement('img');
-        var liTag = document.createElement('li');
-        var smallTag = document.createElement('small');
-        liTag.textContent = data.content;
-        smallTag.textContent = data.timestamp;
-       // imgTag.src = 'http://emilcarlsson.se/assets/mikeross.png';
-
-        if (author === username) {
-          msgListTag.className = 'sent';
-        } else {
-          msgListTag.className = 'replies';
-        }
-
-        msgListTag.appendChild(liTag);
-        msgListTag.appendChild(smallTag);
-
-       // msgListTag.appendChild(imgTag);
-        document.querySelector('#message_sports').appendChild(msgListTag);
-      } */
 
 
       $(function() {
@@ -137,9 +68,7 @@
         //Creating socket from reconnecting-websocket library
         var socket = new ReconnectingWebSocket(ws_path);
 
-        function fetchMessages() {
-        socket.send(JSON.stringify({'command': 'fetch_messages' }));
-      }
+
 
         // Get incoming messages
         socket.onmessage = function(message) {
@@ -147,6 +76,9 @@
           console.log("Got websocket message " + message.data);
 
           var data = JSON.parse(message.data);
+
+
+
           // Handle errors
           if (data.error) {
             alert(data.error);
@@ -191,6 +123,11 @@
             });
             $("#chats").append(roomdiv);
 
+            socket.send(JSON.stringify({
+              command: "fetch",
+              room: data.join,
+
+            }))
 
             // Handle leaving
           } else if (data.leave) {
@@ -214,10 +151,10 @@
 
                 if (current_user == from) {
                   ok_msg =
-                  "<li class='sent'>" + data.message + "</li>"
+                  "<li class='sent'><p>" + data.message + "</p><p>"+ data.username +"</p></li>"
                 } else {
                   ok_msg =
-                  "<li class='replies'>" + data.message+ "</li>"
+                  "<li class='replies'><p>" + data.message+ "</p><p>"+ data.username +"</p></li>"
                 }
 
                 break;
@@ -239,6 +176,44 @@
                   data.username +
                   " left the room!" +
                   "</div>";
+                break;
+              case 6:
+                    //fetch old messages from database
+
+                //if user is already on the page, don't fetch
+
+
+                for(var i =0; i<data.past_messages.length; i++){
+
+                  if (current_user == data.past_messages[i].author) {
+                    if(data.room == data.past_messages[i].room_number){
+                      next_msg =
+                    "<li class='sent'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].author +"</li>"
+
+                    }
+                    else{
+                      next_msg = ""
+                    }
+
+                  } else {
+                    if(data.room == data.past_messages[i].room_number){
+                      next_msg =
+                    "<li class='replies'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].author +"</li>"
+                    }
+                    else{
+                      next_msg = ""
+                    }
+
+                  }
+
+
+
+                  ok_msg = ok_msg + next_msg;
+                }
+
+
+
+
                 break;
               default:
                 console.log("Unsupported message type!");
@@ -282,9 +257,10 @@
 
             $(".room").not("#room-"+roomId).remove();
 
+         // socket.send(JSON.stringify({'command': 'fetch' }));
 
 
-          socket.send(
+            socket.send(
               JSON.stringify({
                 command: "join",
                 room: roomId
