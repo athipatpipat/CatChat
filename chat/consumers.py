@@ -170,15 +170,17 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         
 
         room = await get_room_or_error(room_id, self.scope["user"])
-        await self.channel_layer.group_send(
-             room.group_name,
-             {
-                 "type": "chat.fetch",
-                 "room_id": room_id,
-                 "past_messages": formatted_message,
+        await self.send_json(
+            {
+                "msg_type": settings.MSG_TYPE_OLD_MSG,
+                "room": room_id,
+                "past_messages": formatted_message,
+            }
+            
+        )
 
-             }
-         )
+
+
 
     ##helper to get_msg
     def messages_to_json(self, messages):
