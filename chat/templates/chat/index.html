@@ -152,10 +152,10 @@
                 
                 if (current_user == from) {
                   ok_msg =
-                  "<li class='sent'><p>" + data.message + "</p></li>"
+                  "<li class='sent'><p>" + data.message + "</p><p>"+ data.username +"</p></li>"
                 } else {
                   ok_msg =
-                  "<li class='replies'><p>" + data.message+ "</p></li>"
+                  "<li class='replies'><p>" + data.message+ "</p><p>"+ data.username +"</p></li>"
                 }
 
                 break;
@@ -180,18 +180,17 @@
                 break;
               case 6:
                     //fetch old messages from database
-                console.log(data.past_messages);
-
+               
                 //if user is already on the page, don't fetch
                 
                   
                 for(var i =0; i<data.past_messages.length; i++){
                   
-                  console.log("current user: " + current_user);
                   if (current_user == data.past_messages[i].author) {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='sent'><p>" + data.past_messages[i].content + "</p></li>"
+                    "<li class='sent'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].author +"</li>"
+                    
                     }
                     else{
                       next_msg = ""
@@ -200,7 +199,7 @@
                   } else {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='replies'><p>" + data.past_messages[i].content + "</p></li>"
+                    "<li class='replies'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].author +"</li>"
                     }
                     else{
                       next_msg = ""
