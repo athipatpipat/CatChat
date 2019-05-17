@@ -17,6 +17,11 @@
       src="{% static 'chat/reconnecting-websocket.min.js' %}"
       type="text/javascript"
     ></script>
+    <script
+      src="{% static 'chat/faker.js' %}"
+      type="text/javascript"
+    ></script>
+
 
     <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
@@ -58,6 +63,10 @@
 
       $(function() {
 
+        var firstRandom = faker.random.number();
+        faker.seed(firstRandom);
+
+        var randomName = faker.commerce.productName();
         // Correctly decide between ws:// and wss://
         var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
         var ws_path =
@@ -118,6 +127,7 @@
                   room: data.join,
                   message: roomdiv.find("input").val(),
                   from: current_user,
+                  randomName: randomName
 
                 })
               );
@@ -154,10 +164,10 @@
 
                 if (current_user == from) {
                   ok_msg =
-                  "<li class='sent'><p>" + data.message + "</p><p class='styleusername'>"+ data.username +"</p></li>"
+                  "<li class='sent'><p>" + data.message + "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
                 } else {
                   ok_msg =
-                  "<li class='replies'><p>" + data.message+ "</p><p class='styleusername'>"+ data.username +"</p></li>"
+                  "<li class='replies'><p>" + data.message+ "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
                 }
 
                 break;
@@ -167,7 +177,7 @@
                 // User joined room
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
-                  data.username +
+                  data.randomName +
                   " joined the room!" +
                   "</div>";
                 break;
@@ -176,7 +186,7 @@
                 // User left room
                 ok_msg =
                   "<div class='contextual-message text-muted'>" +
-                  data.username +
+                    data.randomName +
                   " left the room!" +
                   "</div>";
                 break;
@@ -191,7 +201,7 @@
                   if (current_user == data.past_messages[i].author) {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='sent'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].author +"</p></li>"
+                    "<li class='sent'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
 
                     }
                     else{
@@ -201,7 +211,7 @@
                   } else {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='replies'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].author +"</p></li>"
+                    "<li class='replies'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
                     }
                     else{
                       next_msg = ""
@@ -249,7 +259,8 @@
             socket.send(
               JSON.stringify({
                 command: "leave",
-                room: roomId
+                room: roomId,
+                randomName: randomName,
               })
             );
           } else {
@@ -264,7 +275,8 @@
             socket.send(
               JSON.stringify({
                 command: "join",
-                room: roomId
+                room: roomId,
+                randomName: randomName,
               })
             );
           }

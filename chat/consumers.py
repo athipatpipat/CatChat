@@ -5,6 +5,7 @@ from django.contrib.auth import get_user_model
 from .exceptions import ClientError
 from .utils import get_room_or_error
 from .models import Message
+from faker import Faker
 
 User = get_user_model()
 
@@ -24,6 +25,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when the websocket is handshaking as part of initial connection.
         """
+        
+
         # Are they logged in?
         if self.scope["user"].is_anonymous:
             # Reject the connection
@@ -45,12 +48,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         try:
             if command == "join":
                 # Make them join the room
-                await self.join_room(content["room"])
+                await self.join_room(content["room"],content["randomName"])
             elif command == "leave":
                 # Leave the room
-                await self.leave_room(content["room"])
+                await self.leave_room(content["room"],content["randomName"])
             elif command == "send":
-                await self.send_room(content["room"], content["message"], content["from"])
+                await self.send_room(content["room"], content["message"], content["from"], content["randomName"])
             elif command == "fetch":
                 print("fetch from consumers.py")
                 await self.fetch_msg(content["room"])
@@ -75,7 +78,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
 
     ##helper to receive_json
-    async def join_room(self, room_id):
+    async def join_room(self, room_id,randomName):
         """
         Called by receive_json when someone sent a join command.
         """
@@ -89,6 +92,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "type": "chat.join",
                     "room_id": room_id,
                     "username": self.scope["user"].username,
+                    "randomName": randomName,
                 }
             )
         # Store that we're in the room
@@ -105,7 +109,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
     ##helper to receive_json
-    async def leave_room(self, room_id):
+    async def leave_room(self, room_id,randomName):
         """
         Called by receive_json when someone sent a leave command.
         """
@@ -119,6 +123,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "type": "chat.leave",
                     "room_id": room_id,
                     "username": self.scope["user"].username,
+                    "randomName": randomName,
                 }
             )
         # Remove that we're in the room
@@ -134,7 +139,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
     ##helper to receive_json
-    async def send_room(self, room_id, message, author):
+    async def send_room(self, room_id, message, author,randomName):
         """
         Called by receive_json when someone sends a message to a room.
         """
@@ -144,6 +149,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             author= author_user,
             content = message,
             room_number = room_id,
+            random_user = randomName,
         )
 
 
@@ -159,6 +165,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "room_id": room_id,
                 "username": self.scope["user"].username,
                 "message": message,
+                "randomName": randomName,
             }
         )
 
@@ -194,7 +201,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             'author': message.author.username,
             'content': message.content,
             'room_number': message.room_number,
-            'timestamp': str(message.timestamp)
+            'timestamp': str(message.timestamp),
+            'randomName': message.random_user,
         }   
 
 
@@ -211,6 +219,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "msg_type": settings.MSG_TYPE_ENTER,
                 "room": event["room_id"],
                 "username": event["username"],
+                "randomName": event["randomName"],
             },
         )
 
@@ -224,6 +233,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "msg_type": settings.MSG_TYPE_LEAVE,
                 "room": event["room_id"],
                 "username": event["username"],
+                "randomName": event["randomName"],
             },
         )
 
@@ -240,14 +250,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "msg_type": settings.MSG_TYPE_MESSAGE,
                 "room": event["room_id"],
                 "username": event["username"],
+                "randomName": event["randomName"],
                 "message": event["message"],
                
             },
         )
-        """ await Message.objects.create(
-            author= event["username"],
-            content = event["message"],
-        ) """
+       
 
     async def chat_fetch(self, event):
         await self.send_json(

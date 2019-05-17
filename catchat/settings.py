@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'users.apps.UsersConfig',
+    'faker',
 ]
 
 MIDDLEWARE = [
