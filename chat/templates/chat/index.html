@@ -251,7 +251,8 @@
             socket.send(
               JSON.stringify({
                 command: "leave",
-                room: roomId
+                room: roomId,
+                randomName: randomName,
               })
             );
           } else {
@@ -266,7 +267,8 @@
             socket.send(
               JSON.stringify({
                 command: "join",
-                room: roomId
+                room: roomId,
+                randomName: randomName,
               })
             );
           }

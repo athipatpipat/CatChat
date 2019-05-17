@@ -25,11 +25,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         """
         Called when the websocket is handshaking as part of initial connection.
         """
-        """
-        fake = Faker()
-        random_name = fake.name()
-        print("Fake Name:" + fake.name())
-        """
+        
 
         # Are they logged in?
         if self.scope["user"].is_anonymous:
@@ -52,10 +48,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         try:
             if command == "join":
                 # Make them join the room
-                await self.join_room(content["room"])
+                await self.join_room(content["room"],content["randomName"])
             elif command == "leave":
                 # Leave the room
-                await self.leave_room(content["room"])
+                await self.leave_room(content["room"],content["randomName"])
             elif command == "send":
                 await self.send_room(content["room"], content["message"], content["from"], content["randomName"])
             elif command == "fetch":
@@ -82,7 +78,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
 
     ##helper to receive_json
-    async def join_room(self, room_id):
+    async def join_room(self, room_id,randomName):
         """
         Called by receive_json when someone sent a join command.
         """
@@ -96,6 +92,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "type": "chat.join",
                     "room_id": room_id,
                     "username": self.scope["user"].username,
+                    "randomName": randomName,
                 }
             )
         # Store that we're in the room
@@ -112,7 +109,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
         })
 
     ##helper to receive_json
-    async def leave_room(self, room_id):
+    async def leave_room(self, room_id,randomName):
         """
         Called by receive_json when someone sent a leave command.
         """
@@ -126,6 +123,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                     "type": "chat.leave",
                     "room_id": room_id,
                     "username": self.scope["user"].username,
+                    "randomName": randomName,
                 }
             )
         # Remove that we're in the room
@@ -221,6 +219,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "msg_type": settings.MSG_TYPE_ENTER,
                 "room": event["room_id"],
                 "username": event["username"],
+                "randomName": event["randomName"],
             },
         )
 
@@ -234,6 +233,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
                 "msg_type": settings.MSG_TYPE_LEAVE,
                 "room": event["room_id"],
                 "username": event["username"],
+                "randomName": event["randomName"],
             },
         )
 
