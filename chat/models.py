@@ -8,6 +8,7 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
     room_number = models.IntegerField()
+    random_user = models.TextField()
 
     def __str__(self):
         return self.author.username
