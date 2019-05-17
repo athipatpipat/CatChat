@@ -164,10 +164,10 @@
 
                 if (current_user == from) {
                   ok_msg =
-                  "<li class='sent'><p>" + data.message + "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
+                  "<li class='sent'><div>" + data.message + "</div><div class='styleusername'>"+ data.randomName +"</div></li>"
                 } else {
                   ok_msg =
-                  "<li class='replies'><p>" + data.message+ "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
+                  "<li class='replies'><div>" + data.message+ "</div><div class='styleusername'>"+ data.randomName +"</div></li>"
                 }
 
                 break;
@@ -201,7 +201,7 @@
                   if (current_user == data.past_messages[i].author) {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='sent'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
+                    "<li class='sent'><div>" + data.past_messages[i].content + "</div><div class='styleusername'>"+ data.past_messages[i].randomName +"</div></li>"
 
                     }
                     else{
@@ -211,7 +211,7 @@
                   } else {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='replies'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
+                    "<li class='replies'><div>" + data.past_messages[i].content + "</div><div class='styleusername'>"+ data.past_messages[i].randomName +"</div></li>"
                     }
                     else{
                       next_msg = ""
@@ -241,7 +241,7 @@
 
         var buttons = $('.channel-button');
         buttons.click(function() {
-          buttons.css('background-color', 'snow');
+          buttons.css('background-color', 'white');
           $(this).css('background-color', '#e5e8e7');
         })
 
