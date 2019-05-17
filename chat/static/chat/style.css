@@ -71,6 +71,7 @@ h1 {
   background-color: #e5e8e7 !important;
   opacity: 0.5;
   font-weight: bold;
+  border-radius: 15px;
 }
 
 .chat-already-popup {
