@@ -21,7 +21,9 @@
       src="{% static 'chat/faker.js' %}"
       type="text/javascript"
     ></script>
-    
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
 
     <title>CatChat</title>
 
@@ -102,6 +104,7 @@
               "<div class='room' id='room-" +
                data.join +
                "'>" +
+               //"<div class = 'PoomTest'>"
                "<div class='messages'>"+
                "<h1>" +
                data.title +
@@ -109,7 +112,8 @@
                "<div class = 'messageScroll'>"+
                "<ul id='messages'>" + "</ul>" +
                "</div>"+
-               "</div>" +
+               "</div>"+
+               //"</div>"+
                "<form><input type='text' placeholder='Type a message...'></form>" +
                "</div>"
                 );
@@ -160,10 +164,10 @@
 
                 if (current_user == from) {
                   ok_msg =
-                  "<li class='sent'><p>" + data.message + "</p><p>"+ data.randomName +"</p></li>"
+                  "<li class='sent'><p>" + data.message + "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
                 } else {
                   ok_msg =
-                  "<li class='replies'><p>" + data.message+ "</p><p>"+ data.randomName +"</p></li>"
+                  "<li class='replies'><p>" + data.message+ "</p><p class='styleusername'>"+ data.randomName +"</p></li>"
                 }
 
                 break;
@@ -197,7 +201,7 @@
                   if (current_user == data.past_messages[i].author) {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='sent'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].randomName +"</li>"
+                    "<li class='sent'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
 
                     }
                     else{
@@ -207,7 +211,7 @@
                   } else {
                     if(data.room == data.past_messages[i].room_number){
                       next_msg =
-                    "<li class='replies'><p>" + data.past_messages[i].content + "</p>"+ data.past_messages[i].randomName +"</li>"
+                    "<li class='replies'><p>" + data.past_messages[i].content + "</p><p class='styleusername'>"+ data.past_messages[i].randomName +"</li>"
                     }
                     else{
                       next_msg = ""
@@ -226,6 +230,7 @@
                 return;
             }
             msgdiv.append(ok_msg);
+            var msgScroll = $('.messageScroll')
             msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
             $('.messageScroll').scrollTop($('.messageScroll')[0].scrollHeight);
           } else {
@@ -234,8 +239,11 @@
 
         };
 
-
-
+        var buttons = $('.channel-button');
+        buttons.click(function() {
+          buttons.css('background-color', 'snow');
+          $(this).css('background-color', '#e5e8e7');
+        })
 
         // Says if we joined a room or not by if there's a div for it
         inRoom = function(roomId) {

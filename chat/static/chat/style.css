@@ -52,24 +52,23 @@ main {
     outline: none;
 }
 
-.messageScroll{
-  height: 100%;
-}
-
 h1 {
-    font-family: "Arial Narrow", Arial, Helvetica, sans-serif;
+    font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 400;
     overflow: hidden;
-    color: White;
+    color: RebeccaPurple;
+    background-color: white;
     margin: 0px auto;
     text-align: center;
-    background-color: RebeccaPurple;
     padding-bottom: 4px;
+    box-shadow: 0 8px 6px -6px lightgray;
 }
 
 
 .channel-button:hover {
-    background-color: pink !important;
+    background-color: #e5e8e7 !important;
     opacity: 0.5;
+    font-weight: bold;
 }
 
 .chat-already-popup {
@@ -99,6 +98,7 @@ select {
     height: 100%;
     font-size: 100%;
     font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 275;
     bottom: 0;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -106,6 +106,8 @@ select {
     border: none;
     resize: none;
     outline: none;
+    border-radius: 15px;
+    background-color: #e5e8e7;
 }
 
 #chats {
@@ -125,14 +127,21 @@ select {
 
 #chats .messages {
   height: 92.5%;
-  overflow: auto;
-  background: #eee;
+  background: white;
 }
+
+#chats .messageScroll{
+  height: 92.5%;
+  overflow: auto;
+}
+
 
 form {
   height: 7.5%;
   text-align: center;
   margin: 0 auto;
+  border-radius: 15px;
+  background-color: #e5e8e7;
 }
 
 #chats .username {
@@ -183,7 +192,7 @@ li{
   overflow-wrap: break-word;
   background-color: RebeccaPurple;
   font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-  font-weight: lighter;
+  font-weight: 275;
   border-radius: 6px;
   color: white;
   font-size: 20px;
@@ -206,11 +215,11 @@ li{
 
 .replies {
   overflow-wrap: break-word;
-  background-color: Pink;
+  background-color: #e5e8e7;
   font-family: "Segoe UI", "Frutiger", "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
-  font-weight: lighter;
+  font-weight: 275;
   border-radius: 6px;
-  color: white;
+  color: black;
   font-size: 20px;
   list-style-type: none;
   margin: 0px auto;
@@ -226,4 +235,10 @@ li{
   margin-left: 10px;
   margin-top: 5px;
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.styleusername {
+  font-size: 12px;
+  float: right;
+  font-weight: 375;
 }
